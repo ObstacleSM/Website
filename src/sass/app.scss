@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+// Import a Google Font
+// @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css?family=Sanchez:400,700');
+
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
+
+// Set your brand colors
+
+// Update Bulma's global variables
+$family-secondary: 'Sanchez', serif;
+
+$text: $white-ter;
+$text-light: $white-ter;
+$text-strong: $white-bis;
+
+$title-color: $text;
+$subtitle-color: $text-light;
+$subtitle-strong-color: $text-strong;
+
+$table-background-color: $grey-dark;
+$table-color: $text;
+$table-cell-border: 1px solid $grey-darker;
+
+// Update some of Bulma's component variables
+$body-background-color: $grey-darker;
+
+// Import only what you need from Bulma
+@import "../../node_modules/bulma/sass/base/_all.sass";
+@import "../../node_modules/bulma/sass/elements/button.sass";
+@import "../../node_modules/bulma/sass/elements/container.sass";
+@import "../../node_modules/bulma/sass/elements/title.sass";
+@import "../../node_modules/bulma/sass/elements/table.sass";
+@import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/layout/hero.sass";
+@import "../../node_modules/bulma/sass/layout/section.sass";
+
+#brand {
+    font-family: $family-secondary;
+    font-size: $size-4;
+    margin: 0.2em;
+}
+
+#logo {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.mp-element {
+    color: #FFF;
+    display: inline;
+    font-family: Roboto Condensed,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,KenneyIcons,FontAwesome,Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
