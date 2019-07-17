@@ -21,11 +21,9 @@ export function Header() {
 
                 <div id="navbarExampleTransparentExample" className="navbar-menu">
                     <div className="navbar-start">
+                        <Link to="/servers" className="navbar-item">Servers</Link>
                         <Link to="/" className="navbar-item">Latest records</Link>
                         <Link to="/rankings" className="navbar-item">OCS Ranks</Link>
-                        <Link to="/players" className="navbar-item">Players</Link>
-                        <Link to="/maps" className="navbar-item">Maps</Link>
-                        <Link to="/servers" className="navbar-item">Servers</Link>
                     </div>
                 </div>
             </div>
