@@ -9,7 +9,7 @@ import { Header } from './components/Header.js'
 import { Latest, Maps, Players, Rankings, Servers } from './pages'
 
 const client = new ApolloClient({
-    uri: "http://127.0.0.1:8080/graphql",
+    uri: "https://api.obstacle.ovh/graphql",
 });
 
 function App() {
