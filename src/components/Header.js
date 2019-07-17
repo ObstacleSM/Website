@@ -25,6 +25,7 @@ export function Header() {
                         <Link to="/rankings" className="navbar-item">OCS Ranks</Link>
                         <Link to="/players" className="navbar-item">Players</Link>
                         <Link to="/maps" className="navbar-item">Maps</Link>
+                        <Link to="/servers" className="navbar-item">Servers</Link>
                     </div>
                 </div>
             </div>

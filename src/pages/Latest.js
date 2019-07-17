@@ -51,7 +51,7 @@ export const Latest = ({ match }) => (
                         </tr>
                     </thead>
                     <tbody>
-                        {data.records.map((record, index) => (
+                        {data.records && data.records.map((record, index) => (
                             <tr key={index}>
                                 <td>{record.rank}</td>
                                 <td><Link to={`/players/${record.player.login}`}>{<MPElement name={record.player.nickname}/>}</Link></td>
