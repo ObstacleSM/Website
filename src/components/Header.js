@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export function Header() {
     return (
-        <nav className="navbar is-dark">
+        <nav className="navbar is-dark has-shadow">
             <div className="container">
                 <div className="navbar-brand">
                     <Link to="/" className="navbar-item">

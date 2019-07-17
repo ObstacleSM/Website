@@ -1,7 +1,7 @@
 import ApolloClient from "apollo-boost";
 import React from 'react';
 import { ApolloProvider } from "react-apollo";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import './sass/app.scss';
 
@@ -15,7 +15,7 @@ const client = new ApolloClient({
 function App() {
     return (
         <ApolloProvider client={client}>
-            <Router>
+            <BrowserRouter>
                 <Header />
 
                 <Route exact path="/" component={Latest} />
@@ -23,7 +23,7 @@ function App() {
                 <Route path="/players" component={Players} />
                 <Route path="/maps" component={Maps} />
                 <Route path="/servers" component={Servers} />
-            </Router>
+            </BrowserRouter>
         </ApolloProvider>
     );
 }

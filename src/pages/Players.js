@@ -2,15 +2,28 @@ import { gql } from "apollo-boost";
 import React from 'react';
 import { Query } from "react-apollo";
 import { Route } from "react-router-dom";
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { Link } from "react-router-dom";
 
-import { Section, MPElement } from '../components'
+import { Section, MPElement, Time } from '../components'
 
+dayjs.extend(relativeTime);
 
 function query(login) {
     return gql`
     {
         player(login: "${login}") {
-            nickname
+            nickname,
+            records {
+                rank,
+                time,
+                map {
+                    id,
+                    name
+                },
+                updatedAt
+            }
         }
     }
     `;
@@ -26,7 +39,26 @@ const Player = ({ match }) => (
 
             return (
                 <Section title={<MPElement name={data.player.nickname} />} subtitle={match.params.login}>
-
+                    <table className="table is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Time</th>
+                                <th>Map</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.player.records && data.player.records.map((record, index) => (
+                                <tr key={index}>
+                                    <td>{record.rank}</td>
+                                    <td><Time time={record.time} /></td>
+                                    <td><Link to={`/maps/${record.map.id}`}>{<MPElement name={record.map.name}/>}</Link></td>
+                                    <td>{dayjs.unix(record.updatedAt).fromNow()}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </Section>
             );
         }}
