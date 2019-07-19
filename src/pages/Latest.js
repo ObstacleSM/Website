@@ -36,7 +36,7 @@ export const Latest = ({ match }) => (
     <Query query={query(match.params.login)}>
     {({ loading, error, data }) => {
         if (loading) return <Section title="Loading..." />;
-        if (error) return <Section title="Error :(" />;
+        if (error) return <Section title="Error :(" subtitle="Try to refresh your page." />;
 
         return (
             <Section title="Latest records">

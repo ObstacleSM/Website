@@ -33,7 +33,7 @@ const Map = ({ match }) => (
     <Query query={query(match.params.id)}>
         {({ loading, error, data }) => {
             if (loading) return <Section title="Loading..." />;
-            if (error) return <Section title="Error :(" />;
+            if (error) return <Section title="Error :(" subtitle="Try to refresh your page." />;
 
             if (!data.map) return <Section title="Map not found." />;
 

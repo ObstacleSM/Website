@@ -37,93 +37,126 @@ function query() {
     `;
 }
 
-export const Rankings = () => (
-    <Query query={query()}>
-        {({ loading, error, data }) => {
-            if (loading) return <Section title="Loading..." />;
-            if (error) return <Section title="Error :(" />;
+export class Rankings extends React.Component {
+    state = {
+        active: -1
+    }
 
-            let players = [];
+    render() {
+        return (
+            <Query query={query()}>
+                {({ loading, error, data }) => {
+                    if (loading) return <Section title="Loading..." />;
+                    if (error) return <Section title="Error :(" subtitle="Try to refresh your page." />;
 
-            // Get all the unique players of each map
-            for (let map_id in data) {
-                for (let record of data[map_id].records) {
-                    let idx = players.findIndex((p) => p.login === record.player.login);
-                    if (idx === -1) {
-                        players.push({
-                            login: record.player.login,
-                            nickname: record.player.nickname,
-                            ranks: []
-                        });
+                    let players = [];
+
+                    // Get all the unique players of each map
+                    for (let map_id in data) {
+                        for (let record of data[map_id].records) {
+                            let idx = players.findIndex((p) => p.login === record.player.login);
+                            if (idx === -1) {
+                                players.push({
+                                    login: record.player.login,
+                                    nickname: record.player.nickname,
+                                    ranks: [],
+                                    score: 0,
+                                    rank: 0
+                                });
+                            }
+                        }
                     }
-                }
-            }
 
-            let map_number = 1;
-            for (let map_id in data) {
-                for (let record of data[map_id].records) {
-                    let idx = players.findIndex((p) => p.login === record.player.login);
-                    players[idx].ranks.push(record.rank);
-                }
+                    let map_number = 1;
+                    for (let map_id in data) {
+                        for (let record of data[map_id].records) {
+                            let idx = players.findIndex((p) => p.login === record.player.login);
+                            players[idx].ranks.push({rank: record.rank, map: data[map_id].name, map_id: data[map_id].id});
+                        }
 
-                const last_rank = data[map_id].records[data[map_id].records.length - 1].rank;
+                        const last_rank = data[map_id].records[data[map_id].records.length - 1].rank;
 
-                for (let player in players) {
-                    if (players[player].ranks.length < map_number) {
-                        players[player].ranks.push(last_rank)
+                        for (let player in players) {
+                            if (players[player].ranks.length < map_number) {
+                                players[player].ranks.push({rank: last_rank, map: data[map_id].name, map_id: data[map_id].id});
+                            }
+                        }
+                        map_number++;
                     }
-                }
-                map_number++;
-            }
 
-            for (let player in players) {
-                if (players[player].ranks.length < map_number - 1) {
-                    console.error(player, players[player]);
-                }
+                    for (let player in players) {
+                        if (players[player].ranks.length < map_number - 1) {
+                            console.error(player, players[player]);
+                        }
 
-                const ranks = players[player].ranks.sort((a, b) => a - b);
-                players[player].worst = ranks.pop();
-                players[player].score = ranks.reduce(( p, c ) => p + c, 0) / ranks.length;
-            }
+                        const ranks = players[player].ranks.sort((a, b) => a.rank - b.rank);
+                        players[player].worst = ranks.pop();
+                        players[player].score = ranks.reduce(( acc, rank ) => acc + rank.rank, 0) / ranks.length;
+                        ranks.push(players[player].worst); // lol
+                    }
 
-            players.sort((a, b) => (a.score - b.score));
+                    players.sort((a, b) => (a.score - b.score));
 
-            let rank = 0;
-            let old_score = 0;
-            for (let player of players) {
-                if (old_score !== player.score) {
-                    rank += 1;
-                }
+                    let rank = 0;
+                    let old_score = 0;
+                    for (let player of players) {
+                        if (old_score !== player.score) {
+                            rank += 1;
+                        }
 
-                player.rank = rank;
-                old_score = player.score;
-            }
+                        player.rank = rank;
+                        old_score = player.score;
+                    }
 
+                    return (
+                        <Section title="OCS Ranked season">
+                            <table className="table is-fullwidth is-hoverable">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Score</th>
+                                        <th>Player</th>
+                                        <th>Worst rank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {players.map((player, pindex) => {
+                                        const score_row = (
+                                            <tr key={pindex} style={{cursor: 'pointer'}} onClick={() => {
+                                                    if (this.state.active !== pindex) {
+                                                        this.setState({active: pindex});
+                                                    } else {
+                                                        this.setState({active: -1});
+                                                    }
+                                                }}>
+                                                <td className="rank">{player.rank}</td>
+                                                <td className="score">{player.score.toFixed(2)}</td>
+                                                <td className="nickname"><Link to={`/players/${player.login}`}>{<MPElement name={player.nickname}/>}</Link></td>
+                                                <td className="worst">{player.worst.rank}</td>
+                                            </tr>
+                                        );
 
-            return (
-                <Section title="OCS Ranked season">
-                    <table className="table is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Score</th>
-                                <th>Player</th>
-                                <th>Worst rank</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {players.map((player, index) => (
-                                <tr key={index}>
-                                    <td>{player.rank}</td>
-                                    <td>{player.score.toFixed(2)}</td>
-                                    <td><Link to={`/players/${player.login}`}>{<MPElement name={player.nickname}/>}</Link></td>
-                                    <td>{player.worst}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </Section>
-            );
-        }}
-    </Query>
-);
+                                        if (this.state.active !== pindex)
+                                            return score_row;
+
+                                        const subranks = player.ranks.map((rank, rindex) => (
+                                            <tr key={players.length + pindex * player.ranks.length + rindex}>
+                                                <td></td>
+                                                <td className="rank">{rank.rank}</td>
+                                                <td><Link to={`/maps/${rank.map_id}`}>{<MPElement name={rank.map}/>}</Link></td>
+                                                <td></td>
+                                            </tr>
+                                        ));
+
+                                        return [
+                                            score_row,
+                                            ...subranks];
+                                    })}
+                                </tbody>
+                            </table>
+                        </Section>
+                    );
+                }}
+            </Query>);
+    }
+}

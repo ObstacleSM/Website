@@ -33,7 +33,7 @@ const Player = ({ match }) => (
     <Query query={query(match.params.login)}>
         {({ loading, error, data }) => {
             if (loading) return <Section title="Loading..." />;
-            if (error) return <Section title="Error :(" />;
+            if (error) return <Section title="Error :(" subtitle="Try to refresh your page." />;
 
             if (!data.player) return <Section title="Player not found." />;
 
