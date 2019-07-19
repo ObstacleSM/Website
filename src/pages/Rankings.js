@@ -103,7 +103,7 @@ export const Rankings = () => (
             console.log(players);
 
             return (
-                <Section title="OCS Rankings">
+                <Section title="OCS Ranked season">
                     <table className="table is-fullwidth">
                         <thead>
                             <tr>
