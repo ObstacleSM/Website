@@ -88,14 +88,14 @@ export const Rankings = () => (
 
             players.sort((a, b) => (a.score - b.score));
 
-            let rank = 1;
+            let rank = 0;
             let old_score = 0;
             for (let player of players) {
-                player.rank = rank;
-
                 if (old_score !== player.score) {
                     rank += 1;
                 }
+
+                player.rank = rank;
                 old_score = player.score;
             }
 
