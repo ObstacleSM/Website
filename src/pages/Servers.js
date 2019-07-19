@@ -11,7 +11,6 @@ export class Servers extends React.Component {
             .then(res => res.json())
             .then((data) => {
                 this.setState({ servers: data })
-                console.log(this.state.servers)
             })
             .catch(console.log)
     }

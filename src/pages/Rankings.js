@@ -100,8 +100,6 @@ export const Rankings = () => (
             }
 
 
-            console.log(players);
-
             return (
                 <Section title="OCS Ranked season">
                     <table className="table is-fullwidth">
