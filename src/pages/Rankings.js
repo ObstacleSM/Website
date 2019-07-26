@@ -99,13 +99,14 @@ export class Rankings extends React.Component {
 
                     let rank = 0;
                     let old_score = 0;
+                    let old_rank = 0;
                     for (let player of players) {
-                        if (old_score !== player.score) {
-                            rank += 1;
-                        }
+                        rank += 1;
 
-                        player.rank = rank;
+                        player.rank = old_score === player.score ? old_rank : rank;
+
                         old_score = player.score;
+                        old_rank = player.rank;
                     }
 
                     return (
