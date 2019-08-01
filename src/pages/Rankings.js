@@ -6,7 +6,19 @@ import { Link } from "react-router-dom";
 import { Section, MPElement } from '../components'
 
 function query() {
-    let ids = ['JserUfxpKkwXibm_be4zXcz0bEf', 'mHd7vtbizDeEhzBvR8dhIErJWq5', 'LiKJVD1tM5cQppGpSG9nqpBl804', 'i1F1Wzt9NtU0sjslRhySNf9lnac', 'ocQg777gmkg5owWza2BQkwORURl', 'H74MbHFihw_lDg7GWGjqbF7Qzng', 'ZLNQrvXf_f7bRXSju4GrR9bMNxa', '3d5axMHnu6uYgLEBQXgu6AFjau8', '7q_2KooViE3Lm2vLYdzSUqWiWQb', '4rN3fOhkc6ZqoLPSw58N53FqPmg']
+    let ids = [
+        "RIsjj_GMT3IGUFk3yr0DGLj7jDf",
+        "lwcB0qrDfE2QKia8h45a76FSBVc",
+        "kA9whKBXTw3NxFAIy5b5IHqqe6m",
+        "t4jEgg5e8NzUnmgCjcRBJmPMQha",
+        "p92S43lUJR1KKkH6qNX4PZq6OOc",
+        "mRkBIqVWXxqu9j2PLAlnyV20WG4",
+        "ofNaE6T4DChAVtk6ZFWEodLmMLi",
+        "Fv9bVbot9_H5_iMdIjbPcYdGPQ0",
+        "Vqv4CeedejerfLYOuac9tnmJNW9",
+        "hPODtEW2htvLcr5uSdVXltFo1Hl"
+    ];
+
     let q = '';
 
     for (let id of ids) {
