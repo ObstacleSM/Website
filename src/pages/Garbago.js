@@ -63,7 +63,7 @@ export class Garbago extends React.Component {
 
                     let players = [];
 
-                    // Get all the unique players of each map
+                    // Get all the unique players of each map and their record
                     for (let map_id in data) {
                         for (let record of data[map_id].records) {
                             let idx = players.findIndex((p) => p.login === record.player.login);
@@ -76,35 +76,14 @@ export class Garbago extends React.Component {
                                     rank: 0
                                 });
                             }
-                        }
-                    }
-
-                    let map_number = 1;
-                    for (let map_id in data) {
-                        for (let record of data[map_id].records) {
-                            let idx = players.findIndex((p) => p.login === record.player.login);
-                            players[idx].ranks.push({rank: record.rank, map: data[map_id].name, map_id: data[map_id].id});
-                        }
-
-                        const last_rank = data[map_id].records[data[map_id].records.length - 1].rank;
-
-                        for (let player in players) {
-                            if (players[player].ranks.length < map_number) {
-                                players[player].ranks.push({rank: last_rank, map: data[map_id].name, map_id: data[map_id].id});
+                            else {
+                                players[idx].ranks.push({rank: record.rank, map: data[map_id].name, map_id: data[map_id].id});
                             }
                         }
-                        map_number++;
                     }
 
                     for (let player in players) {
-                        if (players[player].ranks.length < map_number - 1) {
-                            console.error(player, players[player]);
-                        }
-
-                        const ranks = players[player].ranks.sort((a, b) => a.rank - b.rank);
-                        players[player].worst = ranks.pop();
-                        players[player].score = ranks.reduce(( acc, rank ) => acc + rank.rank, 0) / ranks.length;
-                        ranks.push(players[player].worst); // lol
+                        players[player].score = ranks.length;
                     }
 
                     players.sort((a, b) => (a.score - b.score));
@@ -122,7 +101,7 @@ export class Garbago extends React.Component {
                     }
 
                     return (
-                        <Section title="OCS Ranked season">
+                        <Section title="Garbago">
                             <table className="table is-fullwidth is-hoverable">
                                 <thead>
                                     <tr>
