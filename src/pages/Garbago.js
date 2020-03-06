@@ -66,7 +66,7 @@ export class Garbago extends React.Component {
                     // Get all the unique players of each map and their record
                     for (let map_id in data) {
                         for (let record of data[map_id].records) {
-                            let idx = players.findindex((p) => p.login === record.player.login);
+                            let idx = players.findIndex((p) => p.login === record.player.login);
                             if (idx === -1) {
                                 players.push({
                                     login: record.player.login,
