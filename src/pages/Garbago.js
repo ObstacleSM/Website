@@ -108,7 +108,6 @@ export class Garbago extends React.Component {
                                         <th>Rank</th>
                                         <th>Score</th>
                                         <th>Player</th>
-                                        <th>Worst rank</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,7 +123,6 @@ export class Garbago extends React.Component {
                                                 <td className="rank">{player.rank}</td>
                                                 <td className="score">{player.score.toFixed(2)}</td>
                                                 <td className="nickname"><Link to={`/players/${player.login}`}>{<MPElement name={player.nickname}/>}</Link></td>
-                                                <td className="worst">{player.worst.rank}</td>
                                             </tr>
                                         );
 
