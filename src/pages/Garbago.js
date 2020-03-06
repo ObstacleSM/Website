@@ -87,7 +87,7 @@ export class Garbago extends React.Component {
                         players[player].score = players[player].ranks.length;
                     }
 
-                    players.sort((a, b) => (a.score - b.score));
+                    players.sort((a, b) => (b.score - a.score));
 
                     let rank = 0;
                     let old_score = 0;
