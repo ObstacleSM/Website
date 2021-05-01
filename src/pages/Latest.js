@@ -3,21 +3,11 @@ import React from 'react';
 import { Query } from "react-apollo";
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar';
-import updateLocale from 'dayjs/plugin/updateLocale';
 import { Link } from "react-router-dom";
 
 import { Section, MPElement, Time } from '../components'
 
 dayjs.extend(calendar);
-dayjs.extend(updateLocale);
-dayjs.updateLocale('en', {
-  calendar: {
-    lastDay: '[Yesterday at] LT',
-    sameDay: '[Today at] LT',
-    lastWeek: 'dddd [(]D[) at] LT',
-    sameElse: 'MMMM D, YYYY h:mm A'
-  }
-});
 
 function query(login) {
     return gql`
