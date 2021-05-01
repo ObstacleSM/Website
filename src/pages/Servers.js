@@ -7,7 +7,7 @@ export class Servers extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://maniaplanet.com/webservices/servers/online?titleUids[]=obstacle@smokegun&length=25')
+        fetch('https://maniaplanet.com/webservices/servers/online?titleUids[]=obstacle@smokegun&length=1000')
             .then(res => res.json())
             .then((data) => {
                 this.setState({ servers: data })
