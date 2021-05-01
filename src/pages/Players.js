@@ -3,6 +3,7 @@ import React from 'react';
 import { Query } from "react-apollo";
 import { Route } from "react-router-dom";
 import dayjs from 'dayjs';
+import calendar from 'dayjs/plugin/calendar';
 import { Link } from "react-router-dom";
 
 import { Section, MPElement, Time } from '../components'
