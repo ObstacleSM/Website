@@ -3,12 +3,12 @@ import React from 'react';
 import { Query } from "react-apollo";
 import { Route } from "react-router-dom";
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime';
+import calendar from 'dayjs/plugin/calendar';
 import { Link } from "react-router-dom";
 
 import { Section, MPElement, Time } from '../components'
 
-dayjs.extend(relativeTime);
+dayjs.extend(calendar);
 
 function query(login) {
     return gql`
@@ -54,7 +54,7 @@ const Player = ({ match }) => (
                                     <td>{record.rank}</td>
                                     <td><Time time={record.time} /></td>
                                     <td><Link to={`/maps/${record.map.id}`}>{<MPElement name={record.map.name}/>}</Link></td>
-                                    <td>{dayjs.unix(record.updatedAt).fromNow()}</td>
+                                    <td>{dayjs.unix(record.updatedAt).calendar()}</td>
                                 </tr>
                             ))}
                         </tbody>
