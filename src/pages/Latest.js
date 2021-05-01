@@ -2,13 +2,12 @@ import { gql } from "apollo-boost";
 import React from 'react';
 import { Query } from "react-apollo";
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime';
+import calendar from 'dayjs/plugin/calendar';
 import { Link } from "react-router-dom";
 
 import { Section, MPElement, Time } from '../components'
 
-
-dayjs.extend(relativeTime);
+dayjs.extend(calendar);
 
 
 function query(login) {
@@ -57,7 +56,7 @@ export const Latest = ({ match }) => (
                                 <td><Link to={`/players/${record.player.login}`}>{<MPElement name={record.player.nickname}/>}</Link></td>
                                 <td><Time time={record.time} /></td>
                                 <td><Link to={`/maps/${record.map.id}`}>{<MPElement name={record.map.name}/>}</Link></td>
-                                <td>{dayjs.unix(record.updatedAt).fromNow()}</td>
+                                <td>{dayjs.unix(record.updatedAt).calendar()}</td>
                             </tr>
                         ))}
                     </tbody>
