@@ -55,7 +55,7 @@ export const Latest = ({ match }) => (
                                 <td><Link to={`/players/${record.player.login}`}>{<MPElement name={record.player.nickname}/>}</Link></td>
                                 <td><Time time={record.time} /></td>
                                 <td><Link to={`/maps/${record.map.id}`}>{<MPElement name={record.map.name}/>}</Link></td>
-                                <td>{dayjs.unix(record.updatedAt).calendar()}</td>
+                                <td>{dayjs.unix(record.updatedAt).calendar(null, {calendar: { lastWeek: 'dddd [at] LT', sameElse: 'MMMM D, YYYY h:mm A'}})}</td>
                             </tr>
                         ))}
                     </tbody>
