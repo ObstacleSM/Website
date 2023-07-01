@@ -188,16 +188,16 @@ const routes = {
 }
 
 function navigate (path) {
-    const current_page = path.split('/')
+    //const current_page = path.split('/')
     
-    try {
+    /*try {
         routes[current_page[1]](...current_page.slice(2))
     } catch (TypeError) {
         if (current_page[1] === 'maps')
             tools.generate_404(`The /maps/ route is outdated, please try <a href="/map/${path.replace('/maps', '/map')}">/map/</a> instead.`)
         else
             tools.generate_404()
-    }
+    }*/
 
     for (const link of document.querySelectorAll(`nav ul a`))
         link.classList.remove('active')
@@ -230,9 +230,9 @@ function document_updated_hook (chunk) {
 }
 
 document.addEventListener('DOMContentLoaded', _ => {
-    navigate(document.location.pathname)
-    history.replaceState({ pathname: document.location.pathname, title: document.title }, document.title)
-    document_updated_hook(document.body)
+    //navigate(document.location.pathname)
+    //history.replaceState({ pathname: document.location.pathname, title: document.title }, document.title)
+    //document_updated_hook(document.body)
 
     const chkbox_menu = document.querySelector('#menu_opened')
     chkbox_menu.checked = false
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', _ => {
         chkbox_menu.checked = false
     })
 
-    window.addEventListener('popstate', event => {
-        navigate(event.state.pathname)
-    })
+    //window.addEventListener('popstate', event => {
+    //    navigate(event.state.pathname)
+    //})
 })
